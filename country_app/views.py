@@ -8,10 +8,6 @@ from .services import get_country_info
 from django.core.paginator import Paginator
 from django.apps import AppConfig
 
-class DirectorConfig(AppConfig):
-    name = "director"
-    def ready(self): 
-        pass
 
 # class CountryList(TemplateView):
 #     template_name = 'country/home.html'
@@ -22,7 +18,6 @@ class DirectorConfig(AppConfig):
 #         }
 #         return context
 class CountryList(ListView):
-    get_country_info()
     model = Countries
     template_name = 'country/home.html'
     context_object_name = 'countries'
@@ -30,13 +25,13 @@ class CountryList(ListView):
     paginate_by = 15
 
 
-def country_list(request):
-    paginator = Paginator(get_country_info(), 4)
+# def country_list(request):
+#     paginator = Paginator(get_country_info(), 4)
 
-    page_number =request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    context = {
-            'countries': get_country_info(),
-            'page_obj': page_obj,
-        }
-    return render(request, 'country/home.html', context)
+#     page_number =request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+#     context = {
+#             'countries': get_country_info(),
+#             'page_obj': page_obj,
+#         }
+#     return render(request, 'country/home.html', context)

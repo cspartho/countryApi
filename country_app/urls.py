@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CountryList,country_list
+from .views import CountryList
 from .services import get_country_info
 urlpatterns = [
     path('', CountryList.as_view(), name='country_list'),
