@@ -1,0 +1,50 @@
+{% extends 'country/base.html'%}
+{% load static %}
+
+{% block content %}
+<table class="table is-fullwidth is-striped is-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Alpha2Code</th>
+            <th>Capital</th>
+            <th>Population</th>
+            <th>Timezone</th>
+            <th>Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for country in countries %}
+        <tr>
+            <td><img src="{{ country.flag_url }}" class="img-thumbnail" style="width:50px;">{{country.name}}</td>
+            <td>{{country.alphacode2}}</td>
+            <td>{{country.capital}}</td>
+            <td>{{country.population}}</td>
+            <td>{{country.timezone}}</td>
+            <td>{{country.neighbouring_countries}}</td>
+            <td>{{country.languages}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if is_paginated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% endblock content %}
