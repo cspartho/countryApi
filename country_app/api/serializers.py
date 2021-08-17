@@ -9,3 +9,8 @@ class CountrySerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
         }
+
+class BorderCountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Countries
+        fields =['name']
