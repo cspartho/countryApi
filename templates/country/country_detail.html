@@ -1,0 +1,26 @@
+{% extends 'meals/base.html'%}
+{% load static %}
+{% block content %}
+
+<div class = "container"> 
+    <br><br>
+    <div class="row"> 
+        <div class="col-md-5">
+          <br>
+          <img class="img-fluid" src="{{ country.image_url }}" alt="" style = "width: 90%;">
+          <br><br>
+          <h3 class="card-title text-center ">{{}}</h3>
+        </div> 
+        <div class="col-md-7 shadow-lg p-3 mb-5 bg-white rounded">
+          <h1 class="my-3">Country Description</h1>
+          <p class = "lead"></p>
+          <h1 class="my-3">Food Details</h1>
+          <ul>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
