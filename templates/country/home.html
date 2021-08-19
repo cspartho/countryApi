@@ -1,6 +1,8 @@
 {% extends 'country/base.html'%}
 {% load static %}
+{% load l10n %}
 {% block content %}
+{% if user.is_authenticated %}
 <div class="container">
   <div class="text-center container">
     <br>
@@ -12,51 +14,54 @@
     </form>
   </div>
   <br><br>
-  
+
   {% if query %}
   <div class="row">
     {% for country in query %}
     <div class="col-sm-3 col-sm-3 col-sm-3">
       <div class="card">
-        <img class="card-img-top" src="{{ country.flag_url }}" alt="Card image cap">
+        <img class="card-img-top" src="{{ country.flag_url }}" style="height: 210px; width: 210px;">
         <div class="card-body text-center">
           <p class="card-title">Name: {{ country.name }}</p>
           <hr>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Alpha2Code: {{country.alphacode2}}</li>
             <li class="list-group-item">Capital: {{country.capital}}</li>
-            <li class="list-group-item">Population:{{country.population}} </li>
+            <li class="list-group-item">Population:{{country.population |localize }} </li>
             <li class="list-group-item">Timezone: {{country.timezone}}</li>
           </ul>
-          <a class="btn btn-primary" href="{{ country.get_absolute_url }}">Details</a>
+          <a class="btn btn-primary" href="/country/{{country.slug}}">Details</a>
         </div>
       </div>
-      </div>
+    </div>
     {% endfor %}
   </div>
- 
-{% else %}
-<div class="row">
-  {% for country in countries %}
-  <div class="col-sm-3 d-flex align-items-sm-stretch">
-    <div class="card mb-3" style="max-width: 240px;">
-      <img class="card-img-top" src="{{ country.flag_url }}" alt="Card image cap">
-      <div class="card-body text-center">
-        <p class="card-title">Name: {{ country.name }}</p>
-        <hr>
-          <p >Alpha2Code: {{country.alphacode2}}</p>
-          <p >Capital: {{country.capital}}</p>
-          <p >Population:{{country.population}} </p>
-          <p >Timezone: {{country.timezone}}</p>
+
+  {% else %}
+  <div class="row">
+    {% for country in countries %}
+    <div class="col-sm-3 d-flex align-items-sm-stretch">
+      <div class="card mb-3" style="max-width: 240px;">
+        <img class="card-img-top" src="{{ country.flag_url }}" alt="Card image cap">
+        <div class="card-body text-center">
+          <p class="card-title">Name: {{ country.name }}</p>
+          <hr>
+          <p>Alpha2Code: {{country.alphacode2}}</p>
+          <p>Capital: {{country.capital}}</p>
+          <p>Population:{{country.population}} </p>
+          <p>Timezone: {{country.timezone}}</p>
+        </div>
+        <a class="btn btn-warning" href="{{ country.get_absolute_url }}">Details</a>
       </div>
-      <a class="btn btn-warning" href="{{ country.get_absolute_url }}">Details</a>
+      <br><br><br>
     </div>
-    <br><br><br>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
 </div>
 
 {% endif %}
-    
+{% else %}
+<h1>Your are not logged in. Please Log in</h1>
+
+{% endif %}
 {% endblock %}

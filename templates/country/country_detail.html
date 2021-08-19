@@ -1,26 +1,56 @@
-{% extends 'meals/base.html'%}
+{% extends 'country/base.html'%}
 {% load static %}
 {% block content %}
 
-<div class = "container"> 
-    <br><br>
-    <div class="row"> 
-        <div class="col-md-5">
-          <br>
-          <img class="img-fluid" src="{{ country.image_url }}" alt="" style = "width: 90%;">
-          <br><br>
-          <h3 class="card-title text-center ">{{}}</h3>
-        </div> 
-        <div class="col-md-7 shadow-lg p-3 mb-5 bg-white rounded">
-          <h1 class="my-3">Country Description</h1>
-          <p class = "lead"></p>
-          <h1 class="my-3">Food Details</h1>
-          <ul>
-            <li></li>
-            <li></li>
-          </ul>
+<div class="col-md-8" style="margin: auto">
+  <div class="card">
+      <div class="card-header" style="color: red; font-weight: bolder">
+          Country Details
+      </div>
+      <div class="row">
+          <div class="col-sm-8">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Name: {{countries.name}}</h5>
+                      <p class="card-text">Alpha2Code: {{countries.alphacode2}}</p>
+                      <p class="card-text">Capital: {{countries.capital}}</p>
+                      <p class="card-text">Population: {{countries.population}}</p>
+                      <p class="card-text">Timezone: {{countries.timezone}}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <img src="{{ object.flag_url }}" style="height: 210px; width: 210px;"/>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-success table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Neighbour Countries</th>
+                        <th scope="col">Languge</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            
+                            {% for nei in countries.ncountry.all%}
+                               <td>{{nei.nname}}</td> 
+                               <td>{{nei.nlanguages}}</td>
+                            {% endfor %}
+                                
+                        </tr>     
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-</div>
+
 
 {% endblock %}

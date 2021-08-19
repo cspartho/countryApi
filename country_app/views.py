@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Countries
+from .models import Countries,NeighbourCountry
+from django.shortcuts import get_object_or_404
 
 import requests
 
@@ -19,11 +20,14 @@ class CountryList(ListView):
         countries=Countries.objects.all().order_by('name')
         context['countries']=countries
         return context
-
+    
 class CountryDetail(DetailView):
     model=Countries
     template_name= 'country/country_detail.html'
     context_object_name = 'countries'
     queryset = Countries.objects.all()
 
-
+    # def get_context_data(self,**kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['neighbour'] = get_object_or_404(NeighbourCountry, id=self.object.id)
+    #     return context

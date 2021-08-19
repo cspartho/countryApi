@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'country_app',
     'rest_framework',
     'django_filters',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,6 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'country_app:country_list'
+LOGOUT_REDIRECT_URL = 'country_app:country_list'
