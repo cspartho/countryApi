@@ -7,4 +7,4 @@ urlpatterns = [
     path('', CountryList.as_view(), name='country_list'),
     path('country/<slug:slug>/',CountryDetail.as_view(),name='country_detail'),
 ]
-#get_country_info()
+get_country_info()
